@@ -1,1 +1,14 @@
-bib/mybib.bib.bak
+*.bak
+*.tex~
+*.aux
+*.eps~
+*.toc
+*.blg
+*.out
+*.xml
+*.gz
+*.tdo
+*.thm
+*.log
+*.bbl
+bib/.$mybib.bib$

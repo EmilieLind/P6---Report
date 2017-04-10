@@ -1,2 +1,26 @@
 \chapter{Background Research}\label{ch:backgroundresearch}
-Bg rs goes here.
+\section{Augmented Reality}
+As suggested by Madden in the book Professional Augmented Reality Browsers for Smartphones, AR is to be thought of as the opposite of Virtual Reality (VR). As Madden explains it: “Virtual reality immerses the user in a computer-generated world whereas AR combines the real world with computer graphics.” \cite{Madden2011}. Moreover, Madden points out that where it requires the user to acquire special equipment to experience VR, AR requires only a device able to capture the environment (e.g. a smartphone or tablet) as well as methods to experience the computer world typically in the form of an overlaying computer graphic in the camera window \cite{Madden2011}. Based on this, Madden defines AR as a technology which combines the real world with computer graphics, tracking and/or providing interaction with objects in real-time. Furthermore, AR provides recognition of images or objects, as well as delivering real-time context or data. By utilising this definition Madden allows technologies to be included that are not considered AR in the strictest interpretations e.g. AR browsers \cite{Madden2011}.
+
+In relation to the above definition of AR, Madden makes a distinction between two tracking systems, namely tracking by markers and markerless tracking. The method of tracking by markers makes use of patterned images, which activate a certain action when recognised. Examples of markers are the fiduciary marker, Quick response codes (QR), and Microsoft Tags. Markerless tracking on the other hand works by tracking objects in the real world not using markers made for the purpose. An example of markerless tracking is facial recognition \cite{Madden2011}.
+
+Approaches to mobile AR are mainly split into two paths, namely AR using location and orientation data to compute what is viewed, and AR using actual image content captured by a camera to compute what is viewed referred to as \textit{computer vision}.
+
+As introduced by Madsen and Lal, Aalborg University, in the book Augmented Reality, chapter 2 \cite{Lal2010}, AR can be associated with three major challenges:
+
+\begin{enumerate}
+\item Camera tracking 
+\item Handling occlusions
+\item Illumination consistency
+\end{enumerate}
+
+The obstacle with camera tracking involves \textit{“matching position and orientation of the camera to the coordinate system of the scene”} \cite{Lal2010}, which deals with making sure the angle of the scene captured by the camera matches that of the virtual scene. Handling occlusions means \textit{“having sufficient 3D information of the real scene to handle occlusion between real and virtual geometry”} \cite{Lal2010}, so that real-world objects such as people walking by may occlude the virtual objects. Lastly, illumination consistency deals with the problems of \textit{“having sufficient knowledge of the real scene illumination to be able to render virtual objects with scene consistent illumination, including shadows”} \cite{Lal2010}. The latter of these three is especially important for creating visually credible AR in outdoor environments because of this scenario’s dynamically changing illumination. In order to counter the problem around illumination consistency Madsen and Lal introduce a technique made suitable for real-time AR \cite{Lal2010}. This technique is based on 3D scene information acquired from a stereo camera, which they combine with illumination information extracted from the shadow information given by the stream of input images.
+
+This technique consists of three steps. In the first one, shadows from the moving objects are detected through a stream of colour images and depth maps. The former were obtained via a video camera, and the latter were made with the help of a stereo camera.
+
+Here is equation~\eqref{eq:esun}:
+
+\begin{equation}
+\label{eq:esun}
+E_{sun} = (\vec{n} \cdot \vec{s}) \times \_E_{sun}
+\end{equation}
