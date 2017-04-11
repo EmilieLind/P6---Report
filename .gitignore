@@ -12,3 +12,5 @@
 *.log
 *.bbl
 bib/.$mybib.bib$
+report.pdf
+report-blx.bib
