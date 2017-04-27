@@ -38,7 +38,7 @@ The following tools are used for the purposes of the preliminary interest test:
 
 \begin{figure}[h!]
 	\centering
-    \includegraphics[scale=0.4]{figures/AR_dino.png}
+    \includegraphics[scale=0.5]{figures/AR_dino.png}
     \caption{A screenshot of the AR Dino Roar app \cite{ARDino}}\label{fig:dino}
 \end{figure}
 
@@ -46,7 +46,7 @@ In the test setup, a circuit is set up with the arduino, breadboard, sensors and
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/pretest_ear.png}
+    \includegraphics[width=0.8\textwidth]{figures/pretest_ear.png}
     \caption{The EDA and pulse sensors attached to a participant}\label{fig:pretest_ear}
 \end{figure}
 
@@ -54,7 +54,7 @@ The test participant is seated in front of a table. On this table is the AR mark
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/pretest_setup.png}
+    \includegraphics[width=0.8\textwidth]{figures/pretest_setup.png}
     \caption{The setup for the preliminary interest test}\label{fig:pretest_setup}
 \end{figure}
 
@@ -77,30 +77,114 @@ Additionally, the SAM gave useful information. The parameters allow users to art
 
 The EDA and IBI data was very inconclusive, and due to technical difficulties only a bit more than half of the data was valid. This means that it would be inappropriate to use it for the final evaluation, especially since it would also be cumbersome and resource-heavy to bring it for the evaluation which will not be stationary and moreover takes place outside with several participants at a time.
 
-\section{From Sketch to Model}
-In order for the 3D model to be representative to the real “Rakkerens Hule”, the dimensioning and shape is primarily inspired by the architectonic sketches made of the excavated ruins of the prison at the western city gate of old Aalborg after its rediscovery in 1907. These were prepared by architect H. Paludan at the request of Nationalmuseet, see Figure \ref{fig:sketch0}. Another source is the descriptions of the site by Chr. Axel Jensen from 1909 \cite{Jensen1909}. Inspiration has also been drawn from the illustration of the south wall made by Carl Wognsen \cite{Riismoller1961}, seen in Figure \ref{fig:sketch1}. 
+\section{Minimum Implementation Requirements}
+The MoSCoW method is used to define minimum implementation requirements by sorting various features for the concept by priority. The \textit{Will not have} category is excluded from this version of the model. The MoSCoW priorities are as follows:\\
+
+\textbf{Must have}:
+\begin{itemize}
+\item A 3D model placed such that it seems to be a hole in the ground when projected onto an image of the street
+\item Ability to read a marker and project a 3D model onto it
+\end{itemize}
+
+\textbf{Should have}:
+\begin{itemize}
+\item Shaders and textures for the 3D model to make it look like a dungeon
+\item Details to the model such as a staircase and chains
+\item The model should be angled in such a way that its perspective lines up with the images captured by the camera
+\end{itemize}
+
+\textbf{Could have}:
+\begin{itemize}
+\item Additional details to the model, such as a prisoner, straw, dirt etc.
+\item Realistic looking light based on information gathered online regarding weather and time of day
+\end{itemize}
+
+\section{Implementation}
+To create an AR application, the plugin Vuforia was used in combination with Unity. The 3D models were created in Autodesk Maya 2015. The implementation process is described in further detail in the following sections.
+
+\subsection{From Sketch to Model}
+\begin{wrapfigure}{r}{0.35\textwidth}
+\centering
+        \includegraphics[width=0.3\textwidth]{figures/sketch1.png}
+        \caption{Illustration by Carlo Wognsen of the dungeon beneath Vesterport, south wall with access to spiral staircase leading up to street level \cite{Riismoller1961}}\label{fig:sketch1}
+\end{wrapfigure}
+
+In order for the 3D model to be representative to the real “Rakkerens Hule”, the dimensioning and shape is primarily inspired by the architectonic sketches made of the excavated ruins of the prison at the western city gate of old Aalborg after its rediscovery in 1907. These were prepared by architect H. Paludan at the request of Nationalmuseet, see Figure \ref{fig:sketch0}. Another source is the descriptions of the site by Chr. Axel Jensen from 1909 \cite{Jensen1909}. Inspiration has also been drawn from the illustration of the south wall made by Carl Wognsen \cite{Riismoller1961}, seen in Figure \ref{fig:sketch1}.
 
 \begin{figure}
     \centering
-    \begin{subfigure}[h!]{0.55\textwidth}
-    	\centering
-        \includegraphics[width=\textwidth]{figures/sketch0.png}
-        \caption{The dungeon beneath Vesterport in Aalborg, plan and section by architect H. Paludan \cite{Jensen1909}}\label{fig:sketch0}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[h!]{0.4\textwidth}
-    	\centering
-        \includegraphics[width=\textwidth]{figures/sketch1.png}
-        \caption{Illustration by Carlo Wognsen of the dungeon beneath Vesterport, south wall with access to spiral staircase leading up to street level \cite{Riismoller1961}}\label{fig:sketch1}
-    \end{subfigure}
+    \includegraphics[width=\textwidth]{figures/sketch0.jpg}
+	\caption{The dungeon beneath Vesterport in Aalborg, plan and section by architect H. Paludan \cite{Jensen1909}}\label{fig:sketch0}
 \end{figure}
 
-The base shape of the 3D model made from the sketches can be seen in Figure \ref{fig:model}. It is made of the geometric primitives: cube, cylinder, and pipe. The cube is used for the floor from which the walls and the staircase have been extruded, whereas the holes for the doorway and embrasure result from bridging the edges, left after the removal of strategic wall faces. A cylinder is used to make the bar in the prison window and the spindle directing the winding staircase. Lastly, half a pipe has been used to make the walls surrounding the staircase.
+\begin{figure}
+    \centering
+        \begin{subfigure}[h!]{0.7\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/model.png}
+        \caption{The model of the dungeon, untextured}\label{fig:model}
+    \end{subfigure}
+    \begin{subfigure}[h!]{0.7\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/model_total.png}
+        \caption{The full model, with textures}\label{fig:total}
+    \end{subfigure}
+    \begin{subfigure}[h!]{0.7\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/model_long.png}
+        \caption{The model as it will approximately look in the app}\label{fig:long}
+    \end{subfigure}
+    \caption{The model of \textit{Rakkerens Hule} to be used in the application}
+\end{figure}
+
+The base shape of the 3D model made from the sketches can be seen in Figure \ref{fig:model}. It is made of the geometric primitives: cube, cylinder, and pipe. The cube is used for the floor from which the walls and the staircase have been extruded, whereas the holes for the doorway and embrasure result from bridging the edges, left after the removal of strategic wall faces. A cylinder is used to make the bar in the prison window and the spindle directing the winding staircase. Lastly, half a pipe has been used to make the walls surrounding the staircase.%\pagebreak
+
+Aside from the descriptions and sketches of the prison’s structure another source was found Jørgensen \cite{Jorgensen1934} and Jensen \cite{Jensen1909} which provided the description of the building materials for the prison. For instance they describe how the prison walls were constructed out of yellow bricks, the floor in the doorway consisted of granite, and the outside walls were covered with a layer of lime mixture. Images of the model with its textures can be seen in Figure \ref{fig:total} and \ref{fig:long}.
+
+\begin{wrapfigure}{l}{0.2\textwidth}
+   \centering
+   \includegraphics[width=0.18\textwidth]{figures/chainmodel.png}
+   \caption{Close-up of a chain from the dungeon model}\label{fig:chain_model}
+\end{wrapfigure}
+
+Like the prison itself, the models of the chains is based on the design of real chains from the renaissance period found during archeological excavations, sketched by Carl Wognsen \cite{Riismoller1961}, see Figure \ref{fig:chains}. Primarily the illustration of the neck iron (Figure \ref{fig:chains1}) has been used since only the neck iron is meant to be attached to a wall in the dungeon. However, the chain part of the handcuffs has inspired the design of the chain device connecting the neck iron to the prison wall.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[h!]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{figures/chains0.jpg}
+        \caption{Full illustration of handcuffs}\label{fig:chains0}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h!]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{figures/chains1.jpg}
+        \caption{Neck iron from the renaissance period. The cross shaped hole is for the chain}\label{fig:chains1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h!]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{figures/chains2.jpg}
+        \caption{Foot shackle from the renaissance period}\label{fig:chains2}
+    \end{subfigure}
+    \caption{Handcuffs from the town hall basement. Similar handcuffs may have been used in the dungeon. Illustration by Carlo Wognsen \cite{Riismoller1961}}\label{fig:chains}
+\end{figure}
+
+The 3D model is constructed from the primitives: pipe, cube, sphere, cylinder, and torus, textured with an iron texture, and it can be seen in its finalised version in  Figure \ref{fig:chain_model}. 
+Two pipes and a cylinder make up the neck iron. Here one large pipe added some extrusions and bridges forms the main part. Meanwhile, does the other smaller pipe together with the cylinder compose the hinge (located at the bottom in the figure). Last but not least is the wall attachment made of a cube, four spheres cut in half as the screws and a round torus from which toruses prolonged into a chain joint shape is put in series in order to become the chain that connects the wall attachment with the neck iron.
+
+\subsection{Light Sources}
+The light setting consist of directional lights, three point lights, a spotlight, and an area light. To have the model’s entirety lit up as if situated outdoor on an average Danish spring day \cite{DMI}, a directional light with a faint tone of warm yellow has been utilised to emit the sunlight. More directional light sources with pale bluish tones have further been added to imitate the scattering of sunlight by atmospheric molecules in the sky --- a phenomenon also called Rayleigh scattering or critical opalescence \cite{DOE} \cite{Renn2005}. For the lighting of the staircase section a spotlight is used. Additionally, the staircase is lit up by three point lights with a deep orange tone to emulate torches hanging on the curved wall which can be seen in Figure \ref{fig:interior0}. Finally, an area light has been used to cast the light deriving from the embrasure hole, see Figure \ref{fig:interior1}.
 
 \begin{figure}[h!]
-   \centering
-   \includegraphics[scale=0.7]{figures/model.png}
-   \caption{The basic model of \textit{Rakkerens Hule}}\label{fig:model}
+    \centering
+    \begin{subfigure}[h!]{0.8\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/interior0.png}
+        \caption{The door in the dungeon, with visible staircase}\label{fig:interior0}
+    \end{subfigure}
+    \begin{subfigure}[h!]{0.8\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/interior1.png}
+        \caption{The door, chains and window in the dungeon}\label{fig:interior1}
+    \end{subfigure}
+    \caption{Close-up of the interior of the model}\label{interior}
 \end{figure}
-
-Aside from the descriptions and sketches of the prison’s structure another source was found Jørgensen \cite{Jorgensen1934} and Jensen \cite{Jensen1909} which provided the description of the building materials for the prison. For instance they describe how the prison walls were constructed out of yellow bricks, the floor in the doorway consisted of granite, and the outside walls were covered with a layer of lime mixture. Images of the model with its textures can be seen in Figure \ref{fig:total} and \ref{fig:long}. 
