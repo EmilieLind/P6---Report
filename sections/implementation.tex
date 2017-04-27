@@ -17,6 +17,8 @@ For this test four different sets of data were gathered. Two of the metrics were
     \caption{The three SAM scales: Pleasure (top), arousal (middle), and control (bottom) \cite{Bradley1994}}\label{fig:SAM}
 \end{figure}
 
+\pagebreak
+
 \subsection{Setup}
 The following tools are used for the purposes of the preliminary interest test:
 
@@ -35,8 +37,8 @@ The following tools are used for the purposes of the preliminary interest test:
 \textit{AR Dino Roar} is an application for android devices in which users may use their own pattern as an AR marker. The app then displays a model of a dinosaur in AR. A screenshot of this app can be seen in Figure \ref{fig:dino}.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.3]{figures/AR_dino.png}
+	\centering
+    \includegraphics[scale=0.4]{figures/AR_dino.png}
     \caption{A screenshot of the AR Dino Roar app \cite{ARDino}}\label{fig:dino}
 \end{figure}
 
@@ -60,7 +62,7 @@ The test participant is seated in front of a table. On this table is the AR mark
 Before the test begins, the facilitator explains the procedure to the participant. They then attach the sensors to the participant as described in the previous section. Before the participant interacts with anything, they must sit idly for one minute, so that a baseline IBI and EDA may be recorded. They are then asked to use the AR Dino Roar app to look at a virtual dinosaur. The stopwatch is started once they begin, and they are asked to tell the facilitator to stop the timer once they are no longer interested in the app. Their IBI and EDA is recorded while they interact with the app. Once they are done interacting with the app, they are asked to answer three questions using the SAM diagram: how pleased, aroused, and in control they felt, respectively. For each question, they were asked to point to one of five images in a given row which best described their feelings, as described in section \ref{subsec:premetrics}.
 
 \subsection{Analysis of results}
-Out of the ten tests only seven sets of data were usable in regards to the logging of the sensor data. At some point after test number 5, something happened to make the data unstable and faulty. It is likely that loose wires are at fault. This means that only seven sets of data from the EDA and IBI sensors are useful, which is not enough to make a clear conclusion on arousal or HRV. The graphs, seen in appendix [placeholder]\todo{fix appendix}, are all very stable.
+Out of the ten tests only seven sets of data were usable in regards to the logging of the sensor data. At some point after test number 5, something happened to make the data unstable and faulty. It is likely that loose wires are at fault. This means that only seven sets of data from the EDA and IBI sensors are useful, which is not enough to make a clear conclusion on arousal or HRV. The graphs, seen in appendix \ref{ch:appA}, are all very stable.
 
 The average time participants spent on the app is 52.20 seconds. However, the data gathered from the timer comes with two outliers caused by unintended interaction with the app and technical issues respectively. These outliers have a considerably impact on the average time, which when leaving out the outliers comes down to 37.75 seconds. 
 
@@ -74,3 +76,31 @@ One was measuring the amount of time they used the app until they stated that th
 Additionally, the SAM gave useful information. The parameters allow users to articulate through images how their experience was. A similar inquiry may be made in the final evaluation of this project. A factor to consider with all three SAM scales is the context of usage. For this test, the participants had no outside context to use the application (such as a tour guide explaining material which is relevant to what can be seen on the screen), and this might have affected the overall experience. 
 
 The EDA and IBI data was very inconclusive, and due to technical difficulties only a bit more than half of the data was valid. This means that it would be inappropriate to use it for the final evaluation, especially since it would also be cumbersome and resource-heavy to bring it for the evaluation which will not be stationary and moreover takes place outside with several participants at a time.
+
+\section{From Sketch to Model}
+In order for the 3D model to be representative to the real “Rakkerens Hule”, the dimensioning and shape is primarily inspired by the architectonic sketches made of the excavated ruins of the prison at the western city gate of old Aalborg after its rediscovery in 1907. These were prepared by architect H. Paludan at the request of Nationalmuseet, see Figure \ref{fig:sketch0}. Another source is the descriptions of the site by Chr. Axel Jensen from 1909 \cite{Jensen1909}. Inspiration has also been drawn from the illustration of the south wall made by Carl Wognsen \cite{Riismoller1961}, seen in Figure \ref{fig:sketch1}. 
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[h!]{0.55\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/sketch0.png}
+        \caption{The dungeon beneath Vesterport in Aalborg, plan and section by architect H. Paludan \cite{Jensen1909}}\label{fig:sketch0}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[h!]{0.4\textwidth}
+    	\centering
+        \includegraphics[width=\textwidth]{figures/sketch1.png}
+        \caption{Illustration by Carlo Wognsen of the dungeon beneath Vesterport, south wall with access to spiral staircase leading up to street level \cite{Riismoller1961}}\label{fig:sketch1}
+    \end{subfigure}
+\end{figure}
+
+The base shape of the 3D model made from the sketches can be seen in Figure \ref{fig:model}. It is made of the geometric primitives: cube, cylinder, and pipe. The cube is used for the floor from which the walls and the staircase have been extruded, whereas the holes for the doorway and embrasure result from bridging the edges, left after the removal of strategic wall faces. A cylinder is used to make the bar in the prison window and the spindle directing the winding staircase. Lastly, half a pipe has been used to make the walls surrounding the staircase.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[scale=0.7]{figures/model.png}
+   \caption{The basic model of \textit{Rakkerens Hule}}\label{fig:model}
+\end{figure}
+
+Aside from the descriptions and sketches of the prison’s structure another source was found Jørgensen \cite{Jorgensen1934} and Jensen \cite{Jensen1909} which provided the description of the building materials for the prison. For instance they describe how the prison walls were constructed out of yellow bricks, the floor in the doorway consisted of granite, and the outside walls were covered with a layer of lime mixture. Images of the model with its textures can be seen in Figure \ref{fig:total} and \ref{fig:long}. 
