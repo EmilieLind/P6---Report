@@ -78,7 +78,7 @@ Additionally, the SAM gave useful information. The parameters allow users to art
 The EDA and IBI data was very inconclusive, and due to technical difficulties only a bit more than half of the data was valid. This means that it would be inappropriate to use it for the final evaluation, especially since it would also be cumbersome and resource-heavy to bring it for the evaluation which will not be stationary and moreover takes place outside with several participants at a time.
 
 \section{Minimum Implementation Requirements}
-The MoSCoW method is used to define minimum implementation requirements by sorting various features for the concept by priority. The \textit{Will not have} category is excluded from this version of the model. The MoSCoW priorities are as follows:\\
+To define the minimum implementation requirements by priority the MoSCoW method developed by Dai Clegg \todo{\cite{Kuhn}} is used to sort the various features for the concept. MoSCow in itself is an acronym which is derived from the first letter of each priority category (Must have, Should have, Could have, and Won’t have but would like). Listed the MoSCoW priorities read as follows:
 
 \textbf{Must have}:
 \begin{itemize}
@@ -89,6 +89,7 @@ The MoSCoW method is used to define minimum implementation requirements by sorti
 \textbf{Should have}:
 \begin{itemize}
 \item Shaders and textures for the 3D model to make it look like a dungeon
+\item Appropriate light setting
 \item Details to the model such as a staircase and chains
 \item The model should be angled in such a way that its perspective lines up with the images captured by the camera
 \end{itemize}
@@ -96,8 +97,21 @@ The MoSCoW method is used to define minimum implementation requirements by sorti
 \textbf{Could have}:
 \begin{itemize}
 \item Additional details to the model, such as a prisoner, straw, dirt etc.
-\item Realistic looking light based on information gathered online regarding weather and time of day
+\item Realistic looking light based on predictable information
 \end{itemize}
+
+\textbf{Won’t have but would like}:
+\begin{itemize}
+\item Markerless detecting system
+\item Light adjustment system that adapts to weather type and time of day
+\end{itemize}
+
+It is found to be of the utmost importance to have a basic 3D model of the subterranean site. Further it is paramount for the users to be able to project this model onto their smartphone screen by registering a marker of some sort. The reasoning behind this priority is that the project first and foremost is about showcasing non-visible scenes occurring on a guided tour and see if this impacts the user experience, cf. the problem statement. 
+
+It has also been deemed to be of some importance to have the model equipped with appropriate shaders and textures lit by a proper set of light sources. As it is explained in the previous chapter, a research study found that textures and shading in accordance with the light improves the 3D percept. Alongside, the texture in relation to the light choices should emphasise the atmosphere of a dungeon. Therefore some explanatory additions to detail the purpose and context of the model should be added e.g. stairs to state it to be on the lowest level (basement level), and chains to indicate prison. 
+
+Of less importance is considerations to a realistic light setting in accordance with the predictable environmentals (e.g. existing buildings and sun orientation at a specific time of day) as well as higher levels of details to the model. Although details like piles of straw, dirt, prisoners, etc. could potentially improve the emphasis to the model and its contents, it is not part of the project’s main objective. Also despite having a light adjusting system which adapts to different weather conditions and time of day would be a nice addition which could add on to the realism of the scene, this has been considered out of the project scope. Lastly, though a markerless system would be a practical part of the finished application since this would make it easier for the guide to manage the application compared to bringing markers along, for the test purpose such a system has been found unnecessary to implement.
+
 
 \section{Implementation}
 To create an AR application, the plugin Vuforia was used in combination with Unity. The 3D models were created in Autodesk Maya 2015. The implementation process is described in further detail in the following sections.
