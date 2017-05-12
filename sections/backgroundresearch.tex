@@ -147,6 +147,40 @@ As introduced by Madsen and Lal \cite{Lal2010}, AR can be associated with three 
 
 The challenge with camera tracking involves \textit{“matching position and orientation of the camera to the coordinate system of the scene”} \cite{Lal2010}, which deals with making sure the angle of the scene captured by the camera matches that of the virtual scene. Handling occlusions means \textit{“having sufficient 3D information of the real scene to handle occlusion between real and virtual geometry”} \cite{Lal2010}, so that real-world objects such as people walking by may occlude the virtual objects. Lastly, illumination consistency deals with the problems of \textit{“having sufficient knowledge of the real scene illumination to be able to render virtual objects with scene consistent illumination, including shadows”} \cite{Lal2010}. The latter of these three is especially important for creating visually credible AR in outdoor environments because of this scenario’s dynamically changing illumination.
 
+\subsection{Tracking Systems} \todo{this next subsection needs to have all the sources added} 
+When dealing with AR one of the more important choices to be made in regards to the system design, is the selection of a suitable tracking system, since these all comes with their advantages and disadvantages. As mentioned before approximately three different types of tracking systems exist: The location/orientation based system utilising GPS and gyroscopic data, the marker based system using pattern recognition for tracking, and the markerless system that tracks by processing environmental data.    
+
+\subsubsection{Tracking by Location and Orientation}
+This form of tracking is the simplest form. For this tracking system the system uses sensors like the GPS and gyroscope to gather coordinate information about the user’s current position and orientation. From this it calculates where to insert the AR overlay. The pros of this tracking system is that it is robust. However, it only works for providing more general knowledge like background information about the visited location, direction guidance, and other similar aspects that does not need to accurately match into the real world to be experienced \cite{Woodford}.
+
+\subsubsection{Marker Based Systems}
+Marker based tracking systems with or without a custom-made marker involves image recognition. However, for an uncontrolled context like the ever changeable outdoors with its varying weather it is hard to calibrate the environment, insert landmarks, control lighting, and confine the operating range in order to facilitate tracking. Yet systems based on computer vision try to accommodate these obstacles. Computer vision has one or more optical sensors i.e. cameras continuously stream data that undergoes some image processing utilising natural features such as edges, corners, or texture patches extracted from the acquired camera images \cite{Barandiaram et al.} \cite{Maidi et al.}. 
+
+Various approaches exist for marker based tracking based on computer vision. Some of the more commonly used approaches to realise AR dedicated to mobile applications is named SURF (Scale Invariant Feature Transform) and SIFT (Speeded Up Robust Features). Of these the SURF approach computes the fastest due to it using box filter techniques to compute a scale-space representation and first and second order differential operators \cite{Oyallon et al.}. Both of these methods, however, likewise track by using \textit{points of interest} and \textit{local invariant descriptors}. The latter is used to uniquely identify points of interest and match them, which can be done during various disruptive conditions. This can for instance be modifications in scale, rotation, illumination, or noise \cite{Maidi et al.}.
+
+Overall  the SURF algorithm works through two consecutive steps. First step is \textit{feature detection}. Through this step candidates for the interest points are chosen based on the maxima of a local box-space. If their response is above a given threshold the candidate is validated afterwards. Those candidates then have their scale and location refined by the use of quadratic fitting. \cite{Oyallon et al.} 
+
+Next step is \textit{feature description}. The purpose of this step is to construct a descriptor of the neighborhood for each point of interest invariant to view-point changes. By the use of multi-scale analysis, scale and translation invariance is provided to the selection of points. Achieving rotation invariance is  done having a dominant orientation defined by considering the local gradient orientation distribution. This is estimated from Haar wavelets. Based on the first order statistics of Haar wavelets coefficients a 64-dimensional descriptor is built utilising a spatial localisation grid. \cite{Oyallon et al.} 
+
+Lastly, to perform the image matching, local descriptors from several images are matched, having them compared by computing the Euclidean distance between the potential matching pairs. To reduce mismatches a nearest-neighbor distance-ratio criterion is used in combination with an optional RANSAC-based technique that checks for geometry consistency, which will not be explained further here \cite{Oyallon et al.}. An example of the use of the SURF algorithm can be seen in Figure \ref{fig:SURF}. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/SURF.jpg}
+    \caption{Image matching using the SURF algorithm}\label{fig:SURF}
+\end{figure}
+
+Roughly explained the SIFT method on the other hand manages this by first constructing a scale space with the purpose of creating an internal representation of the original image which is done to ensure scale invariance. Then the algorithm searches for interest points using a LoG (Laplacian of Gaussian) approximation on the image representation made before. This is used to find key points (the maxima and minima in the Difference of Gaussian image). Then the disadvantageous key points are eliminated e.g. edges and low contrast regions. The remaining key points are afterwards assigned an orientation. Further calculations are then done relative to this orientation to ensure rotation invariance. Lastly, another representation is generated which helps identify features in the image as can be seen in Figure \ref{fig:SIFT} \cite{Sinha}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/SIFT.jpg}
+    \caption{Image matching using the SIFT algorithm}\label{fig:SIFT}
+\end{figure}
+
+The advantage of using a marker based system is that it imitates the process of the human perceptual system of vision in its way to perform pattern recognition from which to call background information \cite{Woodford}.
+
+
 \section{State of the Art}
 Augmented reality can be used to various ends. The game Pokémon Go, which was released in the summer of 2016, includes an optional AR feature \cite{Pokemon}. However, AR has also been utilised for tourism. Feiner et al. (1997) developed a system which allowed users to access information about a campus using an overlay interface \cite{Feiner1997}. Because of the age of this prototype, however, a bulky setup was required, including a backpack-worn computer and a head-mounted display. A prototype built by Fritz et al. (2005) uses a camera, binoculars and internal sensors to augment a video stream with graphical objects, such as information of a site, or visualisations of what a site looked like in the past \cite{Fritz2005}. A sketch of this prototype is seen in Figure \ref{fig:binoculars}.\todo{Add stuff from more recent sources}
 
