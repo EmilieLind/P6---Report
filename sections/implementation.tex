@@ -1,5 +1,5 @@
 \chapter{Design and Implementation}\label{ch:implementation}
-In this chapter a preliminary test will present a study into users’ pleasure, arousal, and feel of control, as well as the average time that users are willing to spend when watching an AR overlay without interacting with it. The latter has been used as the estimation for a baseline for how much time a user can be expected to spend when just looking at an AR application. Following that section an overview of the design including a storyboard, UML diagrams of the system and user interaction\todo{do we need these? we haven't made them}, and the minimum implementation requirements needed to execute the evaluation. Next is described, both the tools used for the implementation and the implementation process from sketch to model are described accompanied by explanations to the implementation of the AR system. 
+In this chapter a preliminary test will present a study into users’ pleasure, arousal, and feel of control, as well as the average time that users are willing to spend when watching an AR overlay without interacting with it. The latter has been used as the estimation for a baseline for how much time a user can be expected to spend when just looking at an AR application. Following that section an overview of the design including a storyboard and the minimum implementation requirements needed to execute the evaluation. Next is described, both the tools used for the implementation and the implementation process from sketch to model are described accompanied by explanations to the implementation of the AR system. 
 
 \section{Preliminary Interest Test}
 For the purpose of testing different methods of data gathering for the evaluation a preliminary test was conducted. This test also served the purpose of obtaining a baseline for the length of time users might spend on an AR application, which also served as an answer to research question 1: \textit{When presented with an AR application with no features other than showing a model, for how long will users generally be willing to direct their attention towards the application?}
@@ -17,8 +17,6 @@ For this test four different sets of data were gathered. Two of the metrics were
     \includegraphics[width=\textwidth]{figures/SAM.png}
     \caption{The three SAM scales: Pleasure (top), arousal (middle), and control (bottom) \cite{Bradley1994}}\label{fig:SAM}
 \end{figure}
-
-\pagebreak
 
 \subsection{Setup}
 The following tools are used for the purposes of the preliminary interest test:
@@ -39,7 +37,7 @@ The following tools are used for the purposes of the preliminary interest test:
 
 \begin{figure}[h!]
 	\centering
-    \includegraphics[scale=0.5]{figures/AR_dino.png}
+    \includegraphics[width=0.8\textwidth]{figures/AR_dino.png}
     \caption{A screenshot of the AR Dino Roar app \cite{ARDino}}\label{fig:dino}
 \end{figure}
 
@@ -63,7 +61,7 @@ The test participant is seated in front of a table. On this table is the AR mark
 Before the test begins, the facilitator explains the procedure to the participant. They then attach the sensors to the participant as described in the previous section. Before the participant interacts with anything, they must sit idly for one minute, so that a baseline IBI and EDA may be recorded. They are then asked to use the AR Dino Roar app to look at a virtual dinosaur. The stopwatch is started once they begin, and they are asked to tell the facilitator to stop the timer once they are no longer interested in the app. Their IBI and EDA is recorded while they interact with the app. Once they are done interacting with the app, they are asked to answer three questions using the SAM diagram: how pleased, aroused, and in control they felt, respectively. For each question, they were asked to point to one of five images in a given row which best described their feelings, as described in section \ref{subsec:premetrics}.
 
 \subsection{Analysis of results}
-Out of the ten tests only seven sets of data were usable in regards to the logging of the sensor data. At some point after test number 5, an error occurred within the arduino circuit, likely loose wires which affected the data gathering. This means that only seven sets of data from the EDA and IBI sensors are useful, which is not enough to make a clear conclusion on arousal or HRV. The graphs, seen in appendix \ref{ch:appA}, are all very stable.
+Out of the ten tests only seven sets of data were usable in regards to the logging of the sensor data. At some point after test number 5, an error occurred within the arduino circuit, likely loose wires which affected the data gathering. This means that only seven sets of data from the EDA and IBI sensors are useful, which is not enough to make a clear conclusion on arousal or HRV. The graphs, seen in appendix \ref{app:preliminary}, are all very stable.
 
 The average time participants spent on the app is 52.20 seconds. However, the data gathered from the timer comes with two outliers caused by unintended interaction with the app and technical issues respectively. These outliers have a considerably impact on the average time, which when leaving out the outliers comes down to 37.75 seconds. 
 
@@ -74,20 +72,47 @@ The primary purpose of this test was to learn how long a user will spend on an A
 
 One was measuring the amount of time they used the app until they stated that they were no longer interested. The average for this test was 52.20 seconds, however removing two outliers reduced it to an average of 37.75 seconds. This can be used as a baseline for how long we expect the participants to use the app during the evaluation.
 
-Additionally, the SAM gave useful information. The parameters allow users to articulate through images how their experience was. A similar inquiry may be made in the final evaluation of this project. A factor to consider with all three SAM scales is the context of usage. For this test, the participants had no outside context to use the application (such as a tour guide explaining material which is relevant to what can be seen on the screen), and this might have affected the overall experience. 
+Additionally, the SAM gave useful information. The parameters allow users to articulate through images how their experience was. A similar inquiry may be made in the final evaluation of this project. A factor to consider with all three SAM scales is the context of usage. For this test, the participants had no outside context to use the application (such as a tour guide explaining material which is relevant to what can be seen on the screen), and this might have affected the overall experience.
 
-The EDA and IBI data was very inconclusive, and due to technical difficulties only a bit more than half of the data was valid. This means that it would be inappropriate to use it for the final evaluation, especially since it would also be cumbersome and resource-heavy to bring it for the evaluation which will not be stationary and moreover takes place outside with several participants at a time.
+The EDA and IBI data was very inconclusive, and due to technical difficulties only a bit more than half of the data was valid. This means that it would be inappropriate to use it for the final evaluation, especially since it would also be cumbersome and resource-heavy to bring it for the evaluation which will not be stationary and moreover takes place outside with several participants at a time.\pagebreak
 
-\section{Minimum Implementation Requirements}
-To define the minimum implementation requirements by priority the MoSCoW method developed by Dai Clegg \todo{\cite{Kuhn}} is used to sort the various features for the concept. MoSCow in itself is an acronym which is derived from the first letter of each priority category (Must have, Should have, Could have, and Won’t have but would like). Listed the MoSCoW priorities read as follows:
+\section{Design Overview}\label{sec:design}
+For the purpose of evaluating the problem statement, an application has been developed. To settle the content of said application an agreement to a theme for a mock-up tour - arranged for the evaluation - has been made between the group and Inge Vestergaard, the tour guide from Aalborg Guideforening. This concerns \textit{Rakkerens Hule} i.e. a dungeon connected to Vesterport currently located beneath Algade, a highly trafficked road in Aalborg City. 
 
-\textbf{Must have}:
+Substantiated by this, the design concept of this application therefore is to apply AR in order to showcase a 3D model of the aforementioned subterranean archeological finding hardly accessible to audience. The reason for the usage of AR is to have the model shown on site in real time such that it can be used as a visual supplement in connectivity to the narratives presented by the tour guide during the tour with the intention of making it feel as if the audience actually sees the attraction. An early mockup of the application concept can be seen in Figure \ref{fig:mockup}.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=0.7\textwidth]{figures/mockup.png}
+   \caption{Mock-up example of application}\label{fig:mockup}
+\end{figure}
+
+Figure \ref{fig:storyboard} shows a storyboard demonstrating the context of use for the AR application: a guide explains that there is a dungeon beneath the city, but it is nowhere to be seen and thus tour goers have no frame of reference to imagine the dungeon. The AR application provides a visual representation of the dungeon and may help provide a better understanding for tour goers.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\textwidth]{figures/storyboard.jpg}
+   \caption{Storyboard showing context of use}\label{fig:storyboard}
+\end{figure}
+
+A screenshot of the final version of the app can be seen in Figure \ref{fig:final_screenshot}. The development process is described in the following sections.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\textwidth]{figures/final_screenshot.png}
+   \caption{A screenshot of the final version of the application}\label{fig:final_screenshot}
+\end{figure}
+
+\subsection{Minimum Implementation Requirements}
+To define the minimum implementation requirements by priority the MoSCoW method developed by Dai Clegg \cite{Kuhn2009} is used to sort the various features for the concept. MoSCow in itself is an acronym which is derived from the first letter of each priority category (Must have, Should have, Could have, and Won’t have but would like). Listed the MoSCoW priorities read as follows:
+
+\paragraph{Must have:}
 \begin{itemize}
 \item A 3D model placed such that it seems to be a hole in the ground when projected onto an image of the street
 \item Ability to read a marker and project a 3D model onto it
 \end{itemize}
 
-\textbf{Should have}:
+\paragraph{Should have:}
 \begin{itemize}
 \item Shaders and textures for the 3D model to make it look like a dungeon
 \item Appropriate light setting
@@ -95,13 +120,13 @@ To define the minimum implementation requirements by priority the MoSCoW method 
 \item The model should be angled in such a way that its perspective lines up with the images captured by the camera
 \end{itemize}
 
-\textbf{Could have}:
+\paragraph{Could have:}
 \begin{itemize}
 \item Additional details to the model, such as a prisoner, straw, dirt etc.
 \item Realistic looking light based on predictable information
 \end{itemize}
 
-\textbf{Won’t have but would like}:
+\paragraph{Won’t have but would like:}
 \begin{itemize}
 \item Markerless detecting system
 \item Light adjustment system that adapts to weather type and time of day
@@ -113,9 +138,15 @@ It has also been deemed to be of some importance to have the model equipped with
 
 Of less importance is considerations to a realistic light setting in accordance with the predictable environmentals (e.g. existing buildings and sun orientation at a specific time of day) as well as higher levels of details to the model. Although details like piles of straw, dirt, prisoners, etc. could potentially improve the emphasis to the model and its contents, it is not part of the project’s main objective. Also despite having a light adjusting system which adapts to different weather conditions and time of day would be a nice addition which could add on to the realism of the scene, this has been considered out of the project scope. Lastly, though a markerless system would be a practical part of the finished application since this would make it easier for the guide to manage the application compared to bringing markers along, for the test purpose such a system has been found unnecessary to implement.
 
-
 \section{Implementation}
-For the purpose of creating the 3D model, the 3D model program Autodesk Maya has been used. The model is based on sketches of the site, as will be explained in the following sections. For creating the application itself, the Vuforia plugin for Unity has been used. The marker consists of an image printed on two A3-sized sheets of paper, which have been attached to a piece of cardboard in order to make the marker more stiff. \todo{probably needs references for the different programs}
+For the purpose of creating the 3D model, the 3D model program Autodesk Maya has been used \cite{Maya}. The model is based on sketches of the site, as will be explained in the following sections. For creating the application itself, the Vuforia plugin for Unity has been used \cite{Vuforia} \cite{Unity}. The marker consists of an image printed on two A3-sized sheets of paper, which have been attached to a piece of cardboard in order to make the marker more stiff. This marker can be seen in Figure \ref{fig:marker_photo}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/marker_photo.jpg}
+	\caption{The marker attached to a piece of cardboard}\label{fig:marker_photo}
+\end{figure}
+\pagebreak
 
 \subsection{From Sketch to Model}
 \begin{wrapfigure}{r}{0.35\textwidth}
@@ -154,15 +185,15 @@ In order for the 3D model to be representative to the real “Rakkerens Hule”,
 
 The base shape of the 3D model made from the sketches can be seen in Figure \ref{fig:model}. It is made of the geometric primitives: cube, cylinder, and pipe. The cube is used for the floor from which the walls and the staircase have been extruded, whereas the holes for the doorway and embrasure result from bridging the edges, left after the removal of strategic wall faces. A cylinder is used to make the bar in the prison window and the spindle directing the winding staircase. Lastly, half a pipe has been used to make the walls surrounding the staircase.%\pagebreak
 
-Aside from the descriptions and sketches of the prison’s structure another source was found Jørgensen \cite{Jorgensen1934} and Jensen \cite{Jensen1909} which provided the description of the building materials for the prison. For instance they describe how the prison walls were constructed out of yellow bricks, the floor in the doorway consisted of granite, and the outside walls were covered with a layer of lime mixture. Images of the model with its textures can be seen in Figure \ref{fig:total} and \ref{fig:long}.
-
-\begin{wrapfigure}{l}{0.2\textwidth}
+\begin{wrapfigure}{l}{0.22\textwidth}
    \centering
-   \includegraphics[width=0.18\textwidth]{figures/chainmodel.png}
+   \includegraphics[width=0.14\textwidth]{figures/chainmodel.png}
    \caption{Close-up of a chain from the dungeon model}\label{fig:chain_model}
 \end{wrapfigure}
 
-Like the prison itself, the models of the chains is based on the design of real chains from the renaissance period found during archeological excavations, sketched by Carl Wognsen \cite{Riismoller1961}, see Figure \ref{fig:chains}. Primarily the illustration of the neck iron (Figure \ref{fig:chains1}) has been used since only the neck iron is meant to be attached to a wall in the dungeon. However, the chain part of the handcuffs has inspired the design of the chain device connecting the neck iron to the prison wall.
+Aside from the descriptions and sketches of the prison’s structure another source was found Jørgensen \cite{Jorgensen1934} and Jensen \cite{Jensen1909} which provided the description of the building materials for the prison. For instance they describe how the prison walls were constructed out of yellow bricks, the floor in the doorway consisted of granite, and the outside walls were covered with a layer of lime mixture. Images of the model with its textures can be seen in Figure \ref{fig:total} and \ref{fig:long}.
+
+Like the prison itself, the models of the chains is based on the design of real chains from the renaissance period found during archeological excavations, sketched by Carl Wognsen \cite{Riismoller1961}, see Figure \ref{fig:chains}. Primarily the illustration of the neck iron (Figure \ref{fig:chains1}) has been used since only the neck iron is meant to be attached to a wall in the dungeon. However, the chain part of the handcuffs has inspired the design of the chain device connecting the neck iron to the prison wall.\pagebreak
 
 \begin{figure}
     \centering
@@ -183,20 +214,21 @@ Like the prison itself, the models of the chains is based on the design of real 
     \caption{Handcuffs from the town hall basement. Similar handcuffs may have been used in the dungeon. Illustration by Carlo Wognsen \cite{Riismoller1961}}\label{fig:chains}
 \end{figure}
 
+\pagebreak
 The 3D model is constructed from the primitives: pipe, cube, sphere, cylinder, and torus, textured with an iron texture, and it can be seen in its finalised version in  Figure \ref{fig:chain_model}. 
 Two pipes and a cylinder make up the neck iron. Here one large pipe added some extrusions and bridges forms the main part. Meanwhile, does the other smaller pipe together with the cylinder compose the hinge (located at the bottom in the figure). Last but not least is the wall attachment made of a cube, four spheres cut in half as the screws and a round torus from which toruses prolonged into a chain joint shape is put in series in order to become the chain that connects the wall attachment with the neck iron.
 
 \subsection{Light Sources}
-The light setting consist of directional lights, three point lights, a spotlight, and an area light. To have the model’s entirety lit up as if situated outdoor on an average Danish spring day \cite{DMI}, a directional light with a faint tone of warm yellow has been utilised to emit the sunlight. More directional light sources with pale bluish tones have further been added to imitate the scattering of sunlight by atmospheric molecules in the sky --- a phenomenon also called Rayleigh scattering or critical opalescence \cite{DOE} \cite{Renn2005}. For the lighting of the staircase section a spotlight is used. Additionally, the staircase is lit up by three point lights with a deep orange tone to emulate torches hanging on the curved wall which can be seen in Figure \ref{fig:interior0}. Finally, an area light has been used to cast the light deriving from the embrasure hole, see Figure \ref{fig:interior1}.
+The light setting consist of directional lights, three point lights, a spotlight, and an area light. To have the model’s entirety lit up as if situated outdoor on an average Danish spring day \cite{DMI}, a directional light with a faint tone of warm yellow has been utilised to emit the sunlight. More directional light sources with pale bluish tones have further been added to imitate the scattering of sunlight by atmospheric molecules in the sky --- a phenomenon also called Rayleigh scattering or critical opalescence \cite{DOE} \cite{Renn2005}. For the lighting of the staircase section a spotlight is used. Additionally, the staircase is lit up by three point lights with a deep orange tone to emulate torches hanging on the curved wall which can be seen in Figure \ref{fig:interior0}. Finally, an area light has been used to cast the light deriving from the embrasure hole, see Figure \ref{fig:interior1}.\pagebreak
 
 \begin{figure}[h!]
     \centering
-    \begin{subfigure}[h!]{0.8\textwidth}
+    \begin{subfigure}[h!]{0.7\textwidth}
     	\centering
         \includegraphics[width=\textwidth]{figures/interior0.png}
         \caption{The door in the dungeon, with visible staircase}\label{fig:interior0}
     \end{subfigure}
-    \begin{subfigure}[h!]{0.8\textwidth}
+    \begin{subfigure}[h!]{0.7\textwidth}
     	\centering
         \includegraphics[width=\textwidth]{figures/interior1.png}
         \caption{The door, chains and window in the dungeon}\label{fig:interior1}
@@ -204,40 +236,39 @@ The light setting consist of directional lights, three point lights, a spotlight
     \caption{Close-up of the interior of the model}\label{interior}
 \end{figure}
 
-
-\section{Implementation} \todo{all the citations in this section need to be implemented. sources are linked in the google doc called 'implementation part'} 
-The project was developed in Unity \cite{unity_main_page}. In order to implement the design solution described in Section …\ref{sec:Design}, several methods were utilized. In general, the implementation of the design solution can be split into three parts: 
+\section{Implementation} 
+The project was developed in Unity \cite{Unity}. In order to implement the design solution described in Section \ref{sec:design}, several methods were utilized. In general, the implementation of the design solution can be split into three parts: 
 \begin{itemize}
 \item Implementing AR
 \item Making the illusion of seeing the 3D model through a hole in the ground
 \item Adjusting lighting
 \end{itemize}
-Below, each of these three parts are described in detail. 
+Each of these three parts are described in the following section. 
 
 \subsection{Implementing AR}
-In order to implement the AR part of the solution, an AR platform called Vuforia was used  \cite{Vuforia_main_page}. It is a marker based solution, where a marker can be a 2D image or a 3D object. For the purpose of this project, a 2D image was utilized. Unfortunately, since Vuforia is a commercial product, it is impossible to describe how exactly it is working. However, keeping in mind the background research described in Section …, it can be assumed that the software recognizes and tracks the marker, calculates its location in relation to the viewer, and places the 3D object accordingly. 
+In order to implement the AR part of the solution, an AR platform called Vuforia was used  \cite{Vuforia}. It is a marker based solution, where a marker can be a 2D image or a 3D object. For the purpose of this project, a 2D image was utilized. Unfortunately, since Vuforia is a commercial product, it is impossible to describe how exactly it is working. However, keeping in mind the background research described in Section \ref{sec:background_ar}, it can be assumed that the software recognizes and tracks the marker, calculates its location in relation to the viewer, and places the 3D object accordingly. 
 
-As it can be seen from the platform anatomy in Figure\ref{fig:imp1}, one way to create a marker in Vuforia is to load a JPEG or PNG image that will be transformed by the Target Manager into an Image Target. 
+As it can be seen from the platform anatomy in Figure \ref{fig:imp1}, one way to create a marker in Vuforia is to load a JPEG or PNG image that will be transformed by the Target Manager into an Image Target. 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/imp1.jpg}
-    \caption{Vuforia platform anatomy}\label{fig:imp1}
+    \includegraphics[width=\textwidth]{figures/imp1.jpg}
+    \caption{Vuforia platform anatomy \cite{getting_started}}\label{fig:imp1}
 \end{figure}
-
 
 How well the software will  work is, in part, determined by the quality of the uploaded image. The quality of an Image Target is dependant on how many features an image has and how evenly those features are spread throughout the image. A feature is defined as a sharp angle of an edge extracted from the image \cite{Natural_features}. Therefore, for the purpose of this project, it was decided to use one image target with a lot of text over white background. The image that was used for the evaluation of our product can be seen in Figure \ref{fig:imp2}. 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/imp2.png}
+    \includegraphics[width=0.5\textwidth]{figures/imp2.png}
     \caption{Image used for the evaluation marker.}\label{fig:imp2}
 \end{figure}
 
 The image was approximately 60 cm wide, which means that the image would have been recognized by the software up to a distance of about six meters \cite{calculate_distance_from_image}. Such a large image was used deliberately for two reasons. Firstly, the image had to be placed on the ground with participants standing around it and looking at it through their phones. This meant that if a participant was standing right next to the image, the distance between the phone and the image would have been approximately 1.5 meters. Secondly, the application was utilized as part of a guided tour experience with approximately ten people in a group. This meant that the participants would probably look at the image through their phones at a distance, forming a circle around the image, thus allowing for everyone to look at the image simultaneously. Having all this in mind and using the Pythagorean theorem, it could be calculated that a participant could stand as far as 5.8 meters from the image, and the phone could still detect it, as can be seen from Figure \ref{fig:imp3}. By using such a large image it was also possible to track it even if parts of it could not be seen. 
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/imp3.png}
+    \includegraphics[width=0.9\textwidth]{figures/imp3.png}
     \caption{An approximate calculation of the maximum distance from the phone to the marker that can be reached without disrupting the detection of the marker.}\label{fig:imp3}
 \end{figure}
 

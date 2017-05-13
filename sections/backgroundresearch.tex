@@ -130,12 +130,12 @@ To this it has to be added that unless two cameras are used to produce the image
 
 Half a year later in the blog post under the headline:\textit{Augmented reality for subsurface utilities: Further improving perception} the original concept has gone through a redesign to improve the depth perception. In this version the original uniform color of the pipes was replaced with textures, and a source light which changes the reflections (shading) along the surfaces was added as well. This was all done in order to give the pipes a more 3D looking shape compared to the original, see Figure \ref{fig:pipes1} \cite{Cote2011}.
 
-\section{Augmented Reality}
+\section{Augmented Reality}\label{sec:background_ar}
 As suggested by Madden, AR is to be thought of as the opposite of Virtual Reality (VR). As Madden explains it: “Virtual reality immerses the user in a computer-generated world whereas AR combines the real world with computer graphics.” \cite{Madden2011}. Moreover, Madden points out that where it requires the user to acquire special equipment to experience VR, AR requires only a device able to capture the environment (e.g. a smartphone or tablet) as well as methods to experience the computer world, typically in the form of an overlaying computer graphic in the camera window \cite{Madden2011}. Based on this, Madden defines AR as a technology which combines the real world with computer graphics, tracking and/or providing interaction with objects in real-time. Furthermore, AR provides recognition of images or objects, as well as delivering real-time context or data. By utilising this definition Madden allows technologies to be included that are not considered AR in the strictest interpretations e.g. AR browsers \cite{Madden2011}.
 
 In relation to the above definition of AR, Madden makes a distinction between two tracking systems, namely tracking by markers and markerless tracking. The method of tracking by markers makes use of patterned images which activate a certain action when recognised. Examples of markers are the fiduciary marker, Quick response codes (QR), and Microsoft Tags. Markerless tracking on the other hand works by tracking objects in the real world not using markers made for the purpose. An example of markerless tracking is facial recognition \cite{Madden2011}.
 
-Approaches to mobile AR are mainly split into two paths, namely AR using location and orientation data to compute what is viewed, and AR using actual image content captured by a camera to compute what is viewed referred to as \textit{computer vision}.
+Approaches to mobile AR are mainly split into two paths, namely AR using location and orientation data to compute what is viewed, and AR using actual image content captured by a camera to compute what is viewed referred to as \textit{computer vision}.\pagebreak
 
 As introduced by Madsen and Lal \cite{Lal2010}, AR can be associated with three major challenges:
 
@@ -154,19 +154,19 @@ When dealing with AR one of the more important choices to be made in regards to 
 This form of tracking is the simplest form. For this tracking system the system uses sensors like the GPS and gyroscope to gather coordinate information about the user’s current position and orientation. From this it calculates where to insert the AR overlay. The pros of this tracking system is that it is robust. However, it only works for providing more general knowledge like background information about the visited location, direction guidance, and other similar aspects that does not need to accurately match into the real world to be experienced \cite{Woodford}.
 
 \subsubsection{Marker Based Systems}
-Marker based tracking systems with or without a custom-made marker involves image recognition. However, for an uncontrolled context like the ever changeable outdoors with its varying weather it is hard to calibrate the environment, insert landmarks, control lighting, and confine the operating range in order to facilitate tracking. Yet systems based on computer vision try to accommodate these obstacles. Computer vision has one or more optical sensors i.e. cameras continuously stream data that undergoes some image processing utilising natural features such as edges, corners, or texture patches extracted from the acquired camera images \cite{Barandiaram et al.} \cite{Maidi et al.}. 
+Marker based tracking systems with or without a custom-made marker involves image recognition. However, for an uncontrolled context like the ever changeable outdoors with its varying weather it is hard to calibrate the environment, insert landmarks, control lighting, and confine the operating range in order to facilitate tracking. Yet systems based on computer vision try to accommodate these obstacles. Computer vision has one or more optical sensors i.e. cameras continuously stream data that undergoes some image processing utilising natural features such as edges, corners, or texture patches extracted from the acquired camera images \cite{Barandiaram2010} \cite{Maidi2011}. 
 
-Various approaches exist for marker based tracking based on computer vision. Some of the more commonly used approaches to realise AR dedicated to mobile applications is named SURF (Scale Invariant Feature Transform) and SIFT (Speeded Up Robust Features). Of these the SURF approach computes the fastest due to it using box filter techniques to compute a scale-space representation and first and second order differential operators \cite{Oyallon et al.}. Both of these methods, however, likewise track by using \textit{points of interest} and \textit{local invariant descriptors}. The latter is used to uniquely identify points of interest and match them, which can be done during various disruptive conditions. This can for instance be modifications in scale, rotation, illumination, or noise \cite{Maidi et al.}.
+Various approaches exist for marker based tracking based on computer vision. Some of the more commonly used approaches to realise AR dedicated to mobile applications is named SURF (Scale Invariant Feature Transform) and SIFT (Speeded Up Robust Features). Of these the SURF approach computes the fastest due to it using box filter techniques to compute a scale-space representation and first and second order differential operators \cite{Oyallon2015}. Both of these methods, however, likewise track by using \textit{points of interest} and \textit{local invariant descriptors}. The latter is used to uniquely identify points of interest and match them, which can be done during various disruptive conditions. This can for instance be modifications in scale, rotation, illumination, or noise \cite{Maidi2011}.
 
-Overall  the SURF algorithm works through two consecutive steps. First step is \textit{feature detection}. Through this step candidates for the interest points are chosen based on the maxima of a local box-space. If their response is above a given threshold the candidate is validated afterwards. Those candidates then have their scale and location refined by the use of quadratic fitting. \cite{Oyallon et al.} 
+Overall  the SURF algorithm works through two consecutive steps. First step is \textit{feature detection}. Through this step candidates for the interest points are chosen based on the maxima of a local box-space. If their response is above a given threshold the candidate is validated afterwards. Those candidates then have their scale and location refined by the use of quadratic fitting. \cite{Oyallon2015} 
 
-Next step is \textit{feature description}. The purpose of this step is to construct a descriptor of the neighborhood for each point of interest invariant to view-point changes. By the use of multi-scale analysis, scale and translation invariance is provided to the selection of points. Achieving rotation invariance is  done having a dominant orientation defined by considering the local gradient orientation distribution. This is estimated from Haar wavelets. Based on the first order statistics of Haar wavelets coefficients a 64-dimensional descriptor is built utilising a spatial localisation grid. \cite{Oyallon et al.} 
+Next step is \textit{feature description}. The purpose of this step is to construct a descriptor of the neighborhood for each point of interest invariant to view-point changes. By the use of multi-scale analysis, scale and translation invariance is provided to the selection of points. Achieving rotation invariance is  done having a dominant orientation defined by considering the local gradient orientation distribution. This is estimated from Haar wavelets. Based on the first order statistics of Haar wavelets coefficients a 64-dimensional descriptor is built utilising a spatial localisation grid. \cite{Oyallon2015} 
 
-Lastly, to perform the image matching, local descriptors from several images are matched, having them compared by computing the Euclidean distance between the potential matching pairs. To reduce mismatches a nearest-neighbor distance-ratio criterion is used in combination with an optional RANSAC-based technique that checks for geometry consistency, which will not be explained further here \cite{Oyallon et al.}. An example of the use of the SURF algorithm can be seen in Figure \ref{fig:SURF}. 
+Lastly, to perform the image matching, local descriptors from several images are matched, having them compared by computing the Euclidean distance between the potential matching pairs. To reduce mismatches a nearest-neighbor distance-ratio criterion is used in combination with an optional RANSAC-based technique that checks for geometry consistency, which will not be explained further here \cite{Oyallon2015}. An example of the use of the SURF algorithm can be seen in Figure \ref{fig:SURF}. 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/SURF.jpg}
+    \includegraphics[width=0.7\textwidth]{figures/SURF.jpg}
     \caption{Image matching using the SURF algorithm}\label{fig:SURF}
 \end{figure}
 
@@ -180,31 +180,30 @@ Roughly explained the SIFT method on the other hand manages this by first constr
 
 The advantage of using a marker based system is that it imitates the process of the human perceptual system of vision in its way to perform pattern recognition from which to call background information \cite{Woodford}.
 
-
 \section{State of the Art}
-Augmented reality can be used to various ends. The game Pokémon Go, which was released in the summer of 2016, includes an optional AR feature \cite{Pokemon}. However, AR has also been utilised for tourism. Feiner et al. (1997) developed a system which allowed users to access information about a campus using an overlay interface \cite{Feiner1997}. Because of the age of this prototype, however, a bulky setup was required, including a backpack-worn computer and a head-mounted display. A prototype built by Fritz et al. (2005) uses a camera, binoculars and internal sensors to augment a video stream with graphical objects, such as information of a site, or visualisations of what a site looked like in the past \cite{Fritz2005}. A sketch of this prototype is seen in Figure \ref{fig:binoculars}.\todo{Add stuff from more recent sources}
+Augmented reality can be used to various ends. The game Pokémon Go, which was released in the summer of 2016, includes an optional AR feature \cite{Pokemon}. However, AR has also been utilised for tourism. Feiner et al. (1997) developed a system which allowed users to access information about a campus using an overlay interface \cite{Feiner1997}. Because of the age of this prototype, however, a bulky setup was required, including a backpack-worn computer and a head-mounted display. A prototype built by Fritz et al. (2005) uses a camera, binoculars and internal sensors to augment a video stream with graphical objects, such as information of a site, or visualisations of what a site looked like in the past \cite{Fritz2005}. A sketch of this prototype is seen in Figure \ref{fig:binoculars}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=0.7]{figures/binoc.png}
+    \includegraphics[scale=1]{figures/binoc.png}
     \caption{Sketch of Fritz et al.'s prototype (left), the unaugmented image (middle), and the augmented image (right) \cite{Fritz2005}}\label{fig:binoculars}
 \end{figure}
 
-While a majority of AR solutions for tourists are scientific prototypes, a few commercial products are available for mobile smartphones. Using apps such as Wikitude, users can experience several different types of AR experiences, as developers are able to upload their AR project to the platform. The app uses different input methods to load the AR experiences, such as GPS location, images, and QR-codes \cite{Wikitude}. It primarily functions as a platform for AR advertisements or similar commercial products. The Yelp app, dedicated to reading and writing reviews of local restaurants, has an optional feature called \textit{monocle}. This allows users to see the average rating of nearby restaurants based on location \cite{Yelp}. A downside to this feature is that depending on the density of nearby restaurants, the screen may get quite cluttered, as can be seen in Figure \ref{fig:yelp}.
+While a majority of AR solutions for tourists are scientific prototypes, a few commercial products are available for mobile smartphones. Using apps such as Wikitude, users can experience several different types of AR experiences, as developers are able to upload their AR project to the platform. The app uses different input methods to load the AR experiences, such as GPS location, images, and QR-codes \cite{Wikitude}. It primarily functions as a platform for AR advertisements or similar commercial products. The Yelp app, dedicated to reading and writing reviews of local restaurants, has an optional feature called \textit{monocle}. This allows users to see the average rating of nearby restaurants based on location \cite{Yelp}. A downside to this feature is that depending on the density of nearby restaurants, the screen may get quite cluttered, as can be seen in Figure \ref{fig:yelp}.\pagebreak
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.65\textwidth]{figures/wikitude.png}
+    \includegraphics[width=\textwidth]{figures/wikitude.png}
     \caption{Screenshot of the Wikitude app, as utilised by Tripadvisor}\label{fig:wikitude}
 \end{figure}
-
-The Yelp app, dedicated to reading and writing reviews of local restaurants, has an optional feature called \textit{monocle}, which allows users to see the average rating of nearby restaurants based on location \cite{Yelp}. A downside to this feature is that depending on the density of nearby restaurants, the screen may get quite cluttered, as can be seen in Figure \ref{fig:yelp}.
-
+\hfill
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.65\textwidth]{figures/yelp.png}
+    \includegraphics[width=\textwidth]{figures/yelp.png}
     \caption{Screenshot of the Yelp monocle feature}\label{fig:yelp}
-\end{figure}\pagebreak
+\end{figure}
+
+\pagebreak
 
 \begin{wrapfigure}{l}{0.4\textwidth}
 \centering
@@ -216,7 +215,7 @@ For examples of existing apps that have similar intend as the goal of this proje
 
 Another app is \textit{Streetmuseum} developed by Brothers and Sisters Creative Ltd on request from Museum of London. When the user holds up their camera this app lets them see an older version of London by adding an image as overlay covering the section of the present day street that the image represent, thereby offering “a window through time” \cite{Brothers}.
 
-The research described in this chapter has covered the most important bases for this project, and based on it the research questions can now start being answered. The procedure for this will begin in the next chapter, where the design for the final prototype also is described. \todo{someone check this}
+The research described in this chapter has covered the most important bases for this project, and based on it the research questions can now start being answered. The procedure for this will begin in the next chapter, where the design for the final prototype also is described.
 
 \begin{figure}[h!]
     \centering
