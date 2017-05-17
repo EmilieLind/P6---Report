@@ -258,6 +258,10 @@ The image is approximately 60 cm wide, which means that the image can be recogni
     \caption{An approximate calculation of the maximum distance from the phone to the marker that can be reached without disrupting the detection of the marker.}\label{fig:imp3}
 \end{figure}
 
+In order to use Vuforia in Unity, the Vuforia Unity Extension was imported into the Unity project as well as a package containing the Image Target. In the default Unity scene hierarchy, the "Main Camera" was replaced with the ARCamera Vuforia prefab. It represents the mobile device's camera in the scene and enables the manipulation of scene objects in accordance with the tracking data \cite{getting_started}. An instance of the Image Target prefab, which represents a single instance of an Image Target object, was also dragged to the scene. The database containing the Image Target itself was added both to the Image Target object and the ARCamera. Lastly, all of the required 3D objects were imported into the scene and were set as children of the Image Target object in the Scene Hierarchy window.
+
+
+
 \subsection{Making the illusion of a hole in the ground}
 To make the illusion of a hole in the ground, the 3D model was placed right below the Image Target. It was also made transparent by using a material with a built-in shader from the Transparent shader family \cite{unity_legacy_shaders}.
 
