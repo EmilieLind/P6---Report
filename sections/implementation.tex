@@ -261,21 +261,29 @@ The image is approximately 60 cm wide, which means that the image can be recogni
 \subsection{Making the illusion of a hole in the ground}
 To make the illusion of a hole in the ground, the 3D model was placed right below the Image Target. It was also made transparent by using a material with a built-in shader from the Transparent shader family \cite{unity_legacy_shaders}.
 
-Besides that, a plane was made in the shape and form of the hole through which the participants would view the 3D model. A material with a custom shader was applied to it. The shader resembles the Unity Standard Shader \cite{unity_standard_shader} with  a few extra lines added to it, which can be seen in Figure \ref{fig:imp4}. The first line, Zwrite Off, is responsible for not writing the pixels of the plane into the depth buffer, and ColorMask 0 checks that none of the plane pixels are rendered to any color channels. Thus, the plane is made transparent. Next, a stencil buffer is used to keep the pixels of the 3D model that are visible through the hole. The rest are discarded \cite{stencil_buffer}. Lines 6 and 8 ensure that a value of one would be written to the buffer. This means that a reference value of one would be assigned to those pixels that can be seen by the viewer through the hole. Comp always indicates that a stencil test will always pass. 
+Besides that, a plane was made in the shape and form of the hole through which the participants would view the 3D model. A material with a custom shader was applied to it. The shader resembles the Unity Standard Shader \cite{unity_standard_shader} with  a few extra lines added to it, which can be seen in Figure \ref{lst:imp4}. The first line, Zwrite Off, is responsible for not writing the pixels of the plane into the depth buffer, and ColorMask 0 checks that none of the plane pixels are rendered to any color channels. Thus, the plane is made transparent. Next, a stencil buffer is used to keep the pixels of the 3D model that are visible through the hole. The rest are discarded \cite{stencil_buffer}. Lines 6 and 8 ensure that a value of one would be written to the buffer. This means that a reference value of one would be assigned to those pixels that can be seen by the viewer through the hole. Comp always indicates that a stencil test will always pass.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/imp4.jpg}
-    \caption{Extra code for the hole.}\label{fig:imp4}
-\end{figure}
+\begin{lstlisting}[language=C, numbers=left, caption={Extra code for the hole}, label=lst:imp4, captionpos=b]
+ZWrite Off
+ColorMask 0
 
-Similarly, a shader was applied to all of the materials of the 3D model. It also resembles the Unity Standard Shader with several lines added to it, which can be seen in Figure \ref{fig:imp5}. The code ensures that only the pixels with a reference value of one would be rendered.
+Pass {
+	Stencil {
+		Ref 1
+		Comp always
+		Pass replace
+	}
+}
+\end{lstlisting}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/imp5.jpg}
-    \caption{Extra code for the 3D model.}\label{fig:imp5}
-\end{figure}
+Similarly, a shader was applied to all of the materials of the 3D model. It also resembles the Unity Standard Shader with several lines added to it, which can be seen in Figure \ref{lst:imp5}. The code ensures that only the pixels with a reference value of one would be rendered.
+
+\begin{lstlisting}[language=C, numbers=left, caption={Extra code for the 3D model}, label=lst:imp5, captionpos=b]
+Stencil {
+	Ref 1
+	Comp Equal
+}
+\end{lstlisting}
 
 Furthermore, a 3D edge around the hole was made to make it more clear for the participants that they were looking through a virtual hole in the ground.
 
