@@ -258,7 +258,7 @@ The image is approximately 60 cm wide, which means that the image can be recogni
     \caption{An approximate calculation of the maximum distance from the phone to the marker that can be reached without disrupting the detection of the marker.}\label{fig:imp3}
 \end{figure}
 
-In order to use Vuforia in Unity, the Vuforia Unity Extension was imported into the Unity project as well as a package containing the Image Target. In the default Unity scene hierarchy, the "Main Camera" was replaced with the ARCamera Vuforia prefab. It represents the mobile device's camera in the scene and enables the manipulation of scene objects in accordance with the tracking data \cite{getting_started}. An instance of the Image Target prefab, which represents a single instance of an Image Target object, was also dragged to the scene. The database containing the Image Target itself was added both to the Image Target object and the ARCamera. Lastly, all of the required 3D objects were imported into the scene and were set as children of the Image Target object in the Scene Hierarchy window.
+In order to use Vuforia in Unity, the Vuforia Unity Extension was imported into the Unity project as well as a package containing the Image Target. In the default Unity Scene Hierarchy window, the "Main Camera" was replaced with the ARCamera Vuforia prefab. It represents the mobile device's camera in the scene and enables the manipulation of scene objects in accordance with the tracking data \cite{getting_started}. An instance of the Image Target prefab, which represents a single instance of an Image Target object, was also dragged to the scene. The database containing the Image Target itself was added both to the Image Target object and the ARCamera. Lastly, all of the required 3D objects were imported into the scene and were set as children of the Image Target object in the Scene Hierarchy window.
 
 
 
@@ -291,8 +291,12 @@ Stencil {
 
 Furthermore, a 3D edge around the hole was made to make it more clear for the participants that they were looking through a virtual hole in the ground.
 
-\subsection{Light Sources}
-The light setting consist of directional lights, three point lights, a spotlight, and an area light. To have the model’s entirety lit up as if situated outdoor on an average Danish spring day \cite{DMI}, a directional light with a faint tone of warm yellow has been utilised to emit the sunlight. More directional light sources with pale bluish tones have further been added to imitate the scattering of sunlight by atmospheric molecules in the sky --- a phenomenon also called Rayleigh scattering or critical opalescence \cite{DOE} \cite{Renn2005}. For the lighting of the staircase section a spotlight is used. Additionally, the staircase is lit up by three point lights with a deep orange tone to emulate torches hanging on the curved wall which can be seen in Figure \ref{fig:interior0}. Finally, an area light has been used to cast the light deriving from the embrasure hole, see Figure \ref{fig:interior1}.\todo{merge this with later lighting section}
+\subsection{Lighting}
+The initial light setting consisted of directional lights, three point lights, a spotlight, and an area light. To have the model entirety lit up as if lit by sunlight on an average Danish spring day \cite{DMI}, a directional light with a faint tone of warm yellow has been utilised. More directional light sources with pale bluish tones have further been added to imitate the scattering of sunlight by atmospheric molecules in the sky---a phenomenon also called Rayleigh scattering or critical opalescence \cite{DOE} \cite{Renn2005}. For the lighting of the staircase section, a spotlight was used. Additionally, the staircase was lit up by three point lights with a deep orange tone to emulate torches hanging on the curved wall which can be seen in Figure \ref{fig:interior0}. Finally, an area light has been used to cast the light deriving from the embrasure hole, see Figure \ref{fig:interior1}.
+
+Unfortunately, the lights did not import properly from Maya into Unity. An attempt was made to bake light maps, but the result of that was not satisfactory. Due to the aforementioned reasons, a minimum light solution was implemented, consisting of a directional light and a skydome. The shadows were disabled, leaving only the diffuse reflection on the model.
+
+Lastly, the project was published to Google Play Store to enable the evaluation participants to access it.
 
 \begin{figure}[h!]
     \centering
@@ -309,8 +313,5 @@ The light setting consist of directional lights, three point lights, a spotlight
     \caption{Close-up of the interior of the model}\label{interior}
 \end{figure}
 
-\subsection{Lighting}
-The lighting of the model from Maya was unfortunately not able to be imported into Unity. Instead a minimum light solution was implemented, consisting of a directional light and a skydome. The shadows were disabled, leaving only the diffuse reflection on the model.
 
-Lastly, the project was published to Google Play Store to enable the evaluation participants to access it.
 
