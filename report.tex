@@ -23,7 +23,7 @@
 \pagestyle{empty} %disable headers and footers
 \pagenumbering{roman} %use roman page numbering in the frontmatter
 \input{sections/frontpage.tex}
-%\input{sections/colophon.tex}
+\input{sections/colophon.tex}
 \input{sections/titlepages.tex}
 \cleardoublepage
 \pdfbookmark[0]{Contents}{label:contents}
@@ -31,10 +31,10 @@
 \tableofcontents
 \listoftodos
 \input{sections/authors.tex}
+\input{sections/preface.tex}
 \cleardoublepage
 %mainmatter
 \pagenumbering{arabic} %use arabic page numbering in the mainmatter
-\input{sections/preface.tex}
 \input{sections/problemstatement.tex}
 \input{sections/backgroundresearch.tex}
 \input{sections/implementation.tex}
